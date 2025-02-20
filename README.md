@@ -2,6 +2,9 @@
 My goal is to create a modern interpretation of C&C: Tiberian Sun while being realistic of my (and Unity's) limitations and also not opening myself to a lawsuit.
 I also plan on adding features that I would have wanted when I played as a kid, and, of course, mod support.
 
+![image](https://github.com/user-attachments/assets/f6b27645-a70c-4497-b941-ec99b8ebc9fd)
+
+
 Disclaimers:
  * This project is not in a playable state. This will be the case for as long as this disclaimer exists. If you're upset by this, feel free to contribute!
  * This project is made in Unity 2022.3.22f1 because it just happened to be what I had installed. This will likely be changed later!
