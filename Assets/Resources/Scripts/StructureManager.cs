@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UIManager;
 
 public class StructureManager : MonoBehaviour
 {
@@ -10,10 +11,17 @@ public class StructureManager : MonoBehaviour
     public bool isBuilding = false;
     public Structure structurePrefab;
     public GameObject ghost;
+    [Space]
+    public List<StructureItem> structures;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
+        UIManager.Instance.PopulateStructures(structures);
     }
 
     private void Update()
@@ -42,7 +50,6 @@ public class StructureManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Floor")))
             {
-                Debug.Log(hit.transform.name);
                 ghost.transform.position = hit.point;
             }
 

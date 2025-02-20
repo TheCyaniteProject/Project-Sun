@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
+// This is the base class. It's intended to be inhereted, but for now is used for all structures
 public class Structure : MonoBehaviour
 {
     public Vector2 gridScale = Vector2.one;
@@ -11,10 +13,15 @@ public class Structure : MonoBehaviour
     public int health = 100;
     public int cost = 100;
     public int refund = 75;
+    [Space]
+    public UnityEvent onBuild;
+    public UnityEvent onSell;
+    public UnityEvent onSelect;
+    public UnityEvent onDeselect;
 
     private bool mouseOver = false;
 
-    public void Select()
+    public virtual void Select()
     {
         StructureManager.Instance.selectedStructure = this;
         if (selectionOutline != null )
@@ -22,7 +29,7 @@ public class Structure : MonoBehaviour
             selectionOutline.SetActive(true);
         }
     }
-    public void DeSelect()
+    public virtual void DeSelect()
     {
         if (StructureManager.Instance.selectedStructure == this)
         {
@@ -34,9 +41,9 @@ public class Structure : MonoBehaviour
         }
     }
 
-    private void Update()
+    public virtual void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
         {
             if (mouseOver)
             {
@@ -44,16 +51,18 @@ public class Structure : MonoBehaviour
             }
             else
             {
-                DeSelect();
+                if (StructureManager.Instance.selectedStructure == this)
+                    DeSelect();
             }
         }
     }
 
-    public void OnMouseEnter()
+    public virtual void OnMouseEnter()
     {
         mouseOver = true;
     }
-    public void OnMouseExit()
+
+    public virtual void OnMouseExit()
     {
         mouseOver = false;
     }
