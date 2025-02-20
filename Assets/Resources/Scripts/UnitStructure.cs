@@ -25,7 +25,10 @@ public class UnitStructure : Structure
 
     public override void DeSelect()
     {
+        if (StructureManager.Instance.selectedStructure == this)
+        {
+            UIManager.Instance.ClearUnits();
+        }
         base.DeSelect();
-        UIManager.Instance.ClearUnits();
     }
 }

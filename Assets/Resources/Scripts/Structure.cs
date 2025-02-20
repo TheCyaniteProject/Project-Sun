@@ -20,6 +20,7 @@ public class Structure : MonoBehaviour
     public UnityEvent onDeselect;
 
     private bool mouseOver = false;
+    private bool isSelected = false;
 
     public virtual void Select()
     {
@@ -28,6 +29,7 @@ public class Structure : MonoBehaviour
         {
             selectionOutline.SetActive(true);
         }
+        isSelected = true;
     }
     public virtual void DeSelect()
     {
@@ -39,6 +41,7 @@ public class Structure : MonoBehaviour
         {
             selectionOutline.SetActive(false);
         }
+        isSelected = false;
     }
 
     public virtual void Update()
@@ -51,8 +54,10 @@ public class Structure : MonoBehaviour
             }
             else
             {
-                if (StructureManager.Instance.selectedStructure == this)
+                if (isSelected)
+                {
                     DeSelect();
+                }
             }
         }
     }
