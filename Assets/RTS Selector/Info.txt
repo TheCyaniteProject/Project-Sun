@@ -1,0 +1,17 @@
+Thank you for using the RTS Selector Asset by Sun Dryd Studios
+
+Here is a quick tutorial on how to use it!
+
+
+1. Place the "Selecting Box" prefab onto a canvas object with the render mode set to "Overlay"
+
+2. Place the "Highlight Ring" onto any of the objects you would like to be highlighted.
+
+3. Profit!
+
+
+You can change which array you reference and seperate them how ever you would like for your project! 
+
+We did our best to comment the code for you to modify.
+
+Contact us if you have any questions!
