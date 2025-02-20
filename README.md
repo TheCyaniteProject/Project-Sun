@@ -1,4 +1,4 @@
-# project-sun
+# Project Sun
 Disclaimers:
  * This project is not in a playable state. This will be the case for as long as this disclaimer exists. If you're upset by this, feel free to contribute!
  * This project is made in Unity 2022.3.22f1 because it just happened to be what I had installed. This will likely be changed later!
