@@ -9,6 +9,8 @@ public class Structure : MonoBehaviour
     [Space]
     public int maxHealth = 100;
     public int health = 100;
+    public int cost = 100;
+    public int refund = 75;
 
     private bool mouseOver = false;
 

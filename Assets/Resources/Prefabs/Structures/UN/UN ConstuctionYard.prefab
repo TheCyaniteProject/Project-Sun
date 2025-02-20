@@ -178,13 +178,14 @@ GameObject:
   - component: {fileID: 2647791921477928412}
   - component: {fileID: 882169737129580275}
   - component: {fileID: 849578019778730545}
+  - component: {fileID: 5090218346771516837}
   m_Layer: 0
   m_Name: UN ConstuctionYard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2647791921477928412
 Transform:
   m_ObjectHideFlags: 0
@@ -240,6 +241,24 @@ MonoBehaviour:
   selectionOutline: {fileID: 6618496832257526598}
   maxHealth: 100
   health: 100
+  cost: 100
+  refund: 75
+--- !u!208 &5090218346771516837
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8340475876001663634}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 7.7, y: 3.67, z: 5.185}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 3.08, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8919175163199639085
 GameObject:
   m_ObjectHideFlags: 0
