@@ -9,6 +9,7 @@ public class Structure : MonoBehaviour
     public Vector2 gridScale = Vector2.one;
     public GameObject selectionOutline;
     [Space]
+    public int power = 10;
     public int maxHealth = 100;
     public int health = 100;
     public int cost = 100;
@@ -22,9 +23,14 @@ public class Structure : MonoBehaviour
     private bool mouseOver = false;
     private bool isSelected = false;
 
+    private void Start()
+    {
+        StructureManager.Instance.structureList.Add(this);
+    }
+
     public virtual void Select()
     {
-        StructureManager.Instance.selectedStructure = this;
+        StructureManager.Instance.SelectStructure(this);
         if (selectionOutline != null )
         {
             selectionOutline.SetActive(true);
@@ -44,20 +50,19 @@ public class Structure : MonoBehaviour
         isSelected = false;
     }
 
+    bool selecting = false;
     public virtual void Update()
     {
         if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
         {
             if (mouseOver)
+                selecting = true;
+        }
+        if (selecting && Input.GetMouseButtonUp(0) && !UIManager.Instance.mouseOverUI)
+        {
+            if (mouseOver)
             {
                 Select();
-            }
-            else
-            {
-                if (isSelected)
-                {
-                    DeSelect();
-                }
             }
         }
         if (UnitManager.Instance._isDragging)
@@ -76,7 +81,13 @@ public class Structure : MonoBehaviour
 
     public virtual void OnMouseExit()
     {
+        selecting = false;
         mouseOver = false;
+    }
+
+    private void OnDestroy()
+    {
+        StructureManager.Instance.structureList.Remove(this);
     }
 
 }

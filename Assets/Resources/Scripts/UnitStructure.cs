@@ -33,4 +33,9 @@ public class UnitStructure : Structure
         }
         base.DeSelect();
     }
+
+    private void OnDestroy()
+    {
+        DeSelect();
+    }
 }

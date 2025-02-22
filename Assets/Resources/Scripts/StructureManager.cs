@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using static UIManager;
 
 public class StructureManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class StructureManager : MonoBehaviour
     public Structure structurePrefab;
     public GameObject ghost;
     [Space]
+    public List<Structure> structureList;
     public List<StructureItem> structures;
 
     private void Awake()
@@ -26,6 +28,14 @@ public class StructureManager : MonoBehaviour
 
     private void Update()
     {
+        if (selectedStructure)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                selectedStructure.DeSelect();
+            }
+        }
+
         if (isBuilding)
         {
             if (!structurePrefab)
@@ -43,6 +53,11 @@ public class StructureManager : MonoBehaviour
                 {
                     Destroy(collider);
                 }
+                foreach (NavMeshObstacle obstacle in ghost.GetComponentsInChildren<NavMeshObstacle>())
+                {
+                    Destroy(obstacle);
+                }
+
                 ghost.SetActive(true);
             }
 
@@ -53,12 +68,16 @@ public class StructureManager : MonoBehaviour
                 ghost.transform.position = hit.point;
             }
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
             {
-                // place
-                Structure newStructure = Instantiate(structurePrefab, transform);
-                newStructure.transform.position = ghost.transform.position;
-                newStructure.gameObject.SetActive(true);
+                if (PlayerData.Instance.money >= structurePrefab.cost)
+                {
+                    PlayerData.Instance.RemoveMoney(structurePrefab.cost);
+                    // place
+                    Structure newStructure = Instantiate(structurePrefab, transform);
+                    newStructure.transform.position = ghost.transform.position;
+                    newStructure.gameObject.SetActive(true);
+                }
             }
             else if (Input.GetMouseButtonDown(1))
             {
@@ -79,5 +98,14 @@ public class StructureManager : MonoBehaviour
         ClearBuildStructure();
         isBuilding = true;
         structurePrefab = structure;
+    }
+
+    public void SelectStructure(Structure structure)
+    {
+        if (selectedStructure)
+        {
+            selectedStructure.DeSelect();
+        }
+        selectedStructure = structure;
     }
 }

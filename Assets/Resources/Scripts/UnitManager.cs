@@ -29,6 +29,14 @@ public class UnitManager : MonoBehaviour
                 isMouseDown = true;
                 mouseStartPosition = Input.mousePosition;
             }
+            if (selectedUnits.Count > 0)
+            {
+                while (selectedUnits.Count > 0)
+                {
+                    selectedUnits[0].DeSelect();
+                }
+            }
+            selectedUnits.Clear();
         }
         if (isMouseDown)
         {

@@ -1156,7 +1156,7 @@ Transform:
   m_GameObject: {fileID: 677099586}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.5, y: 0, z: -0.5}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2409,11 +2409,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_Radius
-      value: 1
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
+      propertyPath: avoidancePriority
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3077111865688665337, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_Name
       value: Test Unit (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077111865688665337, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7097732984981709814, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2493,7 +2501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1280570676
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2742,11 +2750,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_Radius
-      value: 1
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
+      propertyPath: avoidancePriority
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3077111865688665337, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_Name
       value: Test Unit (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077111865688665337, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7097732984981709814, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2893,6 +2909,7 @@ GameObject:
   - component: {fileID: 1440472011}
   - component: {fileID: 1440472010}
   - component: {fileID: 1440472009}
+  - component: {fileID: 1440472012}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -2952,6 +2969,25 @@ Transform:
   - {fileID: 1180190013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1440472012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440472008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a2a1f5595c9184982140b0ddb93648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyLabel: {fileID: 843440193}
+  fullPower: {r: 0.24705882, g: 0.6, b: 0.1882353, a: 1}
+  lowPower: {r: 0.96981126, g: 0.49130228, b: 0.17383398, a: 1}
+  noPower: {r: 0.6, g: 0.19208962, b: 0.1882353, a: 1}
+  powerSlider: {fileID: 595343864}
+  powerBar: {fileID: 875004645}
+  money: 9999
 --- !u!4 &1442802181 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8688852592272237622, guid: b65d9d3d93cfda84db0f5664d656a243, type: 3}
@@ -3883,11 +3919,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_Radius
-      value: 1
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
+      propertyPath: avoidancePriority
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3077111865688665337, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_Name
       value: Test Unit (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3077111865688665337, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7097732984981709814, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3983,6 +4027,7 @@ MonoBehaviour:
   isBuilding: 0
   structurePrefab: {fileID: 0}
   ghost: {fileID: 0}
+  structureList: []
   structures:
   - name: UN ConstructionYard
     icon: {fileID: 21300000, guid: 546eaf91b8e23bb4282b252a26f7749f, type: 3}
@@ -4004,7 +4049,7 @@ MonoBehaviour:
           m_CallState: 2
   - name: UN PowerPlant
     icon: {fileID: 21300000, guid: b96f27cce64bc6a458bfc06005dcf228, type: 3}
-    structure: {fileID: 4655073963330128442, guid: b65d9d3d93cfda84db0f5664d656a243, type: 3}
+    structure: {fileID: 8809786635492000475, guid: b65d9d3d93cfda84db0f5664d656a243, type: 3}
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -4013,7 +4058,7 @@ MonoBehaviour:
           m_MethodName: SetBuildStructure
           m_Mode: 2
           m_Arguments:
-            m_ObjectArgument: {fileID: 4655073963330128442, guid: b65d9d3d93cfda84db0f5664d656a243, type: 3}
+            m_ObjectArgument: {fileID: 8809786635492000475, guid: b65d9d3d93cfda84db0f5664d656a243, type: 3}
             m_ObjectArgumentAssemblyTypeName: Structure, Assembly-CSharp
             m_IntArgument: 0
             m_FloatArgument: 0
@@ -4831,6 +4876,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
       propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158593787838946694, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}
+      propertyPath: avoidancePriority
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3077111865688665337, guid: d42ef01e1b265204392ce70a26bd53bf, type: 3}

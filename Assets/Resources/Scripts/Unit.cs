@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 // This is the base class. It's intended to be inhereted, but for now is used for all units
 [RequireComponent(typeof(NavMeshAgent))]
@@ -30,17 +32,20 @@ public class Unit : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
+    bool selecting = false;
+    Vector3 lastPosition;
     private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
         {
             if (mouseOver)
+                selecting = true;
+        }
+        if (selecting && Input.GetMouseButtonUp(0) && !UIManager.Instance.mouseOverUI)
+        {
+            if (mouseOver)
             {
                 Select();
-            }
-            else
-            {
-                DeSelect();
             }
         }
         else if (Input.GetMouseButtonUp(1) && !UIManager.Instance.mouseOverUI)
@@ -67,22 +72,52 @@ public class Unit : MonoBehaviour
         {
             agent.isStopped = true;
         }
-        isStopped = agent.isStopped;
         if (isStopped)
         {
-            animator.Play("Idle");
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                animator.Play("Idle");
+                animator.SetFloat("offset", Random.Range(0f, 1f));
+            }
         }
         else
         {
             animator.Play("Run");
         }
+
+        float speed = (lastPosition - transform.position).magnitude;
+        if (speed <= 0.01f && !isStopped)
+        {
+            isStopped = true;
+        }
+        else if (speed > 0.01f)
+        {
+            isStopped = false;
+        }
+        //if (isStopped)
+        //{
+        //    Vector3 position = new Vector3(Mathf.Round(transform.position.x / 3) * 3,
+        //                         transform.position.y,
+        //                         Mathf.Round(transform.position.z / 3) * 3);
+
+        //    transform.position = position;
+        //}
+
+        lastPosition = transform.position;
     }
 
     public void SetTarget(Vector3 position)
     {
-        agent.isStopped = false;
-        targetPos = position;
-        agent.destination = targetPos;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(position, out hit, 100f, NavMesh.AllAreas))
+        {
+            agent.isStopped = false;
+            agent.destination = new Vector3(Mathf.Round(hit.position.x / 3) * 3,
+                                 hit.position.y,
+                                 Mathf.Round(hit.position.z / 3) * 3);
+            targetPos = agent.destination;
+            agent.avoidancePriority = Random.Range(1, 100);
+        }
     }
 
     public void Select()
@@ -92,6 +127,10 @@ public class Unit : MonoBehaviour
             selectionOutline.SetActive(true);
         }
         isSelected = true;
+        if (!UnitManager.Instance.selectedUnits.Contains(this))
+        {
+            UnitManager.Instance.selectedUnits.Add(this);
+        }
     }
 
     public void DeSelect()
@@ -101,6 +140,10 @@ public class Unit : MonoBehaviour
             selectionOutline.SetActive(false);
         }
         isSelected = false;
+        if (UnitManager.Instance.selectedUnits.Contains(this))
+        {
+            UnitManager.Instance.selectedUnits.Remove(this);
+        }
     }
 
     public void OnMouseEnter()
@@ -110,6 +153,7 @@ public class Unit : MonoBehaviour
 
     public void OnMouseExit()
     {
+        selecting = false;
         mouseOver = false;
     }
 }
