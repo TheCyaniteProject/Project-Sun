@@ -8,6 +8,10 @@ public class PlayerData : MonoBehaviour
 {
     public static PlayerData Instance;
 
+    public int teamID = 0;
+
+    public List<Team> teams;
+
     [Space]
     public TMP_Text moneyLabel;
     public Color fullPower;
@@ -20,6 +24,18 @@ public class PlayerData : MonoBehaviour
 
     public int maxPower { get { return GetMaxPower(); } }
     public int availablePower { get { return GetAvailablePower(); } }
+
+    [System.Serializable]
+    public class Team
+    {
+        public int teamID;
+        public Color color;
+
+        public Team()
+        {
+            color = Color.white;
+        }
+    }
 
     private void Awake()
     {

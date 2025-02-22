@@ -2981,6 +2981,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5a2a1f5595c9184982140b0ddb93648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  teamID: 0
+  teams:
+  - teamID: 0
+    color: {r: 1, g: 0.8883755, b: 0, a: 1}
   moneyLabel: {fileID: 843440193}
   fullPower: {r: 0.24705882, g: 0.6, b: 0.1882353, a: 1}
   lowPower: {r: 0.96981126, g: 0.49130228, b: 0.17383398, a: 1}

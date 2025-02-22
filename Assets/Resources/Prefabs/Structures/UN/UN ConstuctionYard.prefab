@@ -240,11 +240,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridScale: {x: 1, y: 1}
   selectionOutline: {fileID: 6618496832257526598}
+  teamID: 0
   power: 0
-  maxHealth: 100
-  health: 100
-  cost: 100
-  refund: 75
+  maxHealth: 1000
+  health: 1000
+  cost: 3000
   onBuild:
     m_PersistentCalls:
       m_Calls: []

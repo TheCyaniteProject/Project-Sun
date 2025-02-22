@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour
     public NavMeshAgent agent;
     public GameObject selectionOutline;
     [Space]
+    public int teamID = 0;
     public int maxHealth = 100;
     public int health = 100;
     public int cost = 100;

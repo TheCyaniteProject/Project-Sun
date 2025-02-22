@@ -16,6 +16,7 @@ public class UnitStructure : Structure
         newUnit.transform.position = insidePoint.position;
         newUnit.gameObject.SetActive(true);
         newUnit.SetTarget(spawnPoint.position);
+        newUnit.teamID = teamID;
         UnitManager.Instance.unitList.Add(newUnit);
     }
 

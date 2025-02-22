@@ -77,6 +77,7 @@ public class StructureManager : MonoBehaviour
                     Structure newStructure = Instantiate(structurePrefab, transform);
                     newStructure.transform.position = ghost.transform.position;
                     newStructure.gameObject.SetActive(true);
+                    newStructure.teamID = PlayerData.Instance.teamID;
                 }
             }
             else if (Input.GetMouseButtonDown(1))

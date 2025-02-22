@@ -9,11 +9,11 @@ public class Structure : MonoBehaviour
     public Vector2 gridScale = Vector2.one;
     public GameObject selectionOutline;
     [Space]
+    public int teamID = 0;
     public int power = 10;
     public int maxHealth = 100;
     public int health = 100;
     public int cost = 100;
-    public int refund = 75;
     [Space]
     public UnityEvent onBuild;
     public UnityEvent onSell;
@@ -30,6 +30,9 @@ public class Structure : MonoBehaviour
 
     public virtual void Select()
     {
+        if (teamID != PlayerData.Instance.teamID)
+            return;
+
         StructureManager.Instance.SelectStructure(this);
         if (selectionOutline != null )
         {

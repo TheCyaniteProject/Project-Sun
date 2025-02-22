@@ -659,11 +659,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridScale: {x: 1, y: 1}
   selectionOutline: {fileID: 9217366077186134826}
-  power: 30
-  maxHealth: 100
-  health: 100
-  cost: 100
-  refund: 75
+  teamID: 0
+  power: 100
+  maxHealth: 750
+  health: 750
+  cost: 300
   onBuild:
     m_PersistentCalls:
       m_Calls: []
