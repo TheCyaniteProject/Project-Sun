@@ -2,7 +2,8 @@
 My goal is to create a modern interpretation of C&C: Tiberian Sun while being realistic of my (and Unity's) limitations and also not opening myself to a lawsuit.
 I also plan on adding features that I would have wanted when I played as a kid, and, of course, mod support.
 
-![image](https://github.com/user-attachments/assets/f6b27645-a70c-4497-b941-ec99b8ebc9fd)
+![image](https://github.com/user-attachments/assets/7958b4fc-e11a-423d-925a-cc433de5914c)
+
 
 
 Disclaimers:
