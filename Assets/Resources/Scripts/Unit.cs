@@ -21,6 +21,8 @@ public class Unit : MonoBehaviour
 
     private bool isSelected = false;
     private bool mouseOver = false;
+    [Space]
+    public Animator animator;
 
     private void Awake()
     {
@@ -60,6 +62,14 @@ public class Unit : MonoBehaviour
             agent.isStopped = true;
         }
         isStopped = agent.isStopped;
+        if (isStopped)
+        {
+            animator.Play("Idle");
+        }
+        else
+        {
+            animator.Play("Run");
+        }
     }
 
     public void SetTarget(Vector3 position)

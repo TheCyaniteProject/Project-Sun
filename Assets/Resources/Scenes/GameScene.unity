@@ -1222,8 +1222,8 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_Bias: 0.008
+    m_NormalBias: 0
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -1249,7 +1249,7 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 59
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -3958,7 +3958,7 @@ GameObject:
   - component: {fileID: 1989065729}
   - component: {fileID: 1989065728}
   - component: {fileID: 1989065727}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Map Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
