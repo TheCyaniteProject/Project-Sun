@@ -60,6 +60,13 @@ public class Structure : MonoBehaviour
                 }
             }
         }
+        if (UnitManager.Instance._isDragging)
+        {
+            if (isSelected)
+            {
+                DeSelect();
+            }
+        }
     }
 
     public virtual void OnMouseEnter()

@@ -51,9 +51,15 @@ public class Unit : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Floor")))
                 {
-                    Debug.Log(name +": Target set to " + hit.point);
                     SetTarget(hit.point);
                 }
+            }
+        }
+        if (UnitManager.Instance._isDragging && !UnitManager.Instance.selectedUnits.Contains(this))
+        {
+            if (isSelected)
+            {
+                DeSelect();
             }
         }
 
