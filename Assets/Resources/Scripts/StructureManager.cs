@@ -15,6 +15,7 @@ public class StructureManager : MonoBehaviour
     [Space]
     public List<Structure> structureList;
     public List<StructureItem> structures;
+    [HideInInspector]public List<Structure> yards = new List<Structure>();
 
     private void Awake()
     {
@@ -28,6 +29,9 @@ public class StructureManager : MonoBehaviour
 
     private void Update()
     {
+        if (yards.Count == 0)
+            UIManager.Instance.ClearStructures();
+
         if (selectedStructure)
         {
             if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
@@ -70,18 +74,18 @@ public class StructureManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
             {
-                if (PlayerData.Instance.money >= structurePrefab.cost)
-                {
-                    PlayerData.Instance.RemoveMoney(structurePrefab.cost);
-                    // place
-                    Structure newStructure = Instantiate(structurePrefab, transform);
-                    newStructure.transform.position = ghost.transform.position;
-                    newStructure.gameObject.SetActive(true);
-                    newStructure.teamID = PlayerData.Instance.teamID;
-                }
+                // place
+                Structure newStructure = Instantiate(structurePrefab, transform);
+                newStructure.transform.position = ghost.transform.position;
+                newStructure.gameObject.SetActive(true);
+                newStructure.teamID = PlayerData.Instance.teamID;
+                ClearBuildStructure();
+                UIManager.Instance.EnableStructures();
             }
             else if (Input.GetMouseButtonDown(1) && !UIManager.Instance.mouseOverUI)
             {
+                PlayerData.Instance.AddMoney(structurePrefab.cost);
+                UIManager.Instance.EnableStructures();
                 ClearBuildStructure();
             }
         }

@@ -76,7 +76,8 @@ public class UnitManager : MonoBehaviour
                 Vector3[] positions = GetPositionsArray(hit.point, Enumerable.Range(1, factor).Select(x => x * 5).ToArray(), Enumerable.Range(1, factor).Select(x => unitRadius * x).ToArray());
                 for (int i = 0; i < selectedUnits.Count; i++)
                 {
-                        selectedUnits[i].SetTarget(positions[i]);
+                    selectedUnits[i].agent.stoppingDistance = 0;
+                    selectedUnits[i].SetTarget(positions[i]);
                 }
             }
         }
@@ -86,6 +87,7 @@ public class UnitManager : MonoBehaviour
     {
         foreach (Unit unit in unitList)
         {
+            if (!unit) continue;
             Vector3 screenPos = Camera.main.WorldToScreenPoint(unit.transform.position);
             float left = selectionBox.transform.position.x - (selectionBox.sizeDelta.x / 2);
             float right = selectionBox.transform.position.x + (selectionBox.sizeDelta.x / 2);

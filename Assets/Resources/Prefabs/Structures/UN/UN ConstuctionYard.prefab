@@ -177,7 +177,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2647791921477928412}
   - component: {fileID: 882169737129580275}
-  - component: {fileID: 849578019778730545}
+  - component: {fileID: -7560287183192199830}
   - component: {fileID: 5090218346771516837}
   m_Layer: 0
   m_Name: UN ConstuctionYard
@@ -226,7 +226,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 15.4, y: 7.34, z: 10.37}
   m_Center: {x: 0, y: 3.08, z: 0}
---- !u!114 &849578019778730545
+--- !u!114 &-7560287183192199830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8340475876001663634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50f3690efce57f743b2e48d108f43189, type: 3}
+  m_Script: {fileID: 11500000, guid: 51270b035576c044cb24fb326d5278c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gridScale: {x: 1, y: 1}
@@ -245,6 +245,7 @@ MonoBehaviour:
   maxHealth: 1000
   health: 1000
   cost: 3000
+  buildTime: 10
   onBuild:
     m_PersistentCalls:
       m_Calls: []
@@ -257,6 +258,8 @@ MonoBehaviour:
   onDeselect:
     m_PersistentCalls:
       m_Calls: []
+  mouseOver: 0
+  isSelected: 0
 --- !u!208 &5090218346771516837
 NavMeshObstacle:
   m_ObjectHideFlags: 0

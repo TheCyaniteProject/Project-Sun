@@ -36,13 +36,17 @@ public class UnitStructure : Structure
 
     public virtual void SpawnUnit(Unit unit)
     {
-        Debug.Log(UnitManager.Instance.name);
-        Unit newUnit = Instantiate(unit, UnitManager.Instance.transform);
-        newUnit.transform.position = spawnPoint.position;
-        newUnit.gameObject.SetActive(true);
-        newUnit.SetTarget(destinationPoint.position);
-        newUnit.teamID = teamID;
-        UnitManager.Instance.unitList.Add(newUnit);
+        if (PlayerData.Instance.money >= unit.cost)
+        {
+            PlayerData.Instance.RemoveMoney(unit.cost);
+
+            Unit newUnit = Instantiate(unit, UnitManager.Instance.transform);
+            newUnit.transform.position = spawnPoint.position;
+            newUnit.gameObject.SetActive(true);
+            newUnit.SetTarget(destinationPoint.position);
+            newUnit.teamID = teamID;
+            UnitManager.Instance.unitList.Add(newUnit);
+        }
     }
 
     public override void Select()

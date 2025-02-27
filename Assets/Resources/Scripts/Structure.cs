@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,7 @@ public class Structure : MonoBehaviour
     public int maxHealth = 100;
     public int health = 100;
     public int cost = 100;
+    public int buildTime = 10;
     [Space]
     public UnityEvent onBuild;
     public UnityEvent onSell;
@@ -77,6 +79,26 @@ public class Structure : MonoBehaviour
         }
     }
 
+    public void Damage(int amount)
+    {
+        if (health == maxHealth)
+        {
+            UIManager.Instance.voice.clip = UIManager.Instance.buildingAttacked;
+            UIManager.Instance.voice.Play();
+        }
+        health -= amount;
+        if (health <= 0f)
+        {
+            // TODO Animation
+            Destroy(gameObject);
+
+            if (StructureManager.Instance.structureList.Contains(this))
+            {
+                StructureManager.Instance.structureList.Remove(this);
+            }
+        }
+    }
+
     public virtual void OnMouseEnter()
     {
         mouseOver = true;
@@ -90,6 +112,9 @@ public class Structure : MonoBehaviour
 
     private void OnDestroy()
     {
+        DeSelect();
+        UIManager.Instance.voice.clip = UIManager.Instance.buildingLost;
+        UIManager.Instance.voice.Play();
         StructureManager.Instance.structureList.Remove(this);
     }
 

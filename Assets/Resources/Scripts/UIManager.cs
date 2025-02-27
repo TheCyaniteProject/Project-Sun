@@ -17,6 +17,18 @@ public class UIManager : MonoBehaviour
 
     public bool mouseOverUI = false;
 
+    public AudioSource voice;
+    public AudioClip constructionStart;
+    public AudioClip constructionEnd;
+    public AudioClip trainingStart;
+    public AudioClip trainingEnd;
+    public AudioClip lowMoney;
+    public AudioClip canceled;
+    public AudioClip unitAttacked;
+    public AudioClip unitLost;
+    public AudioClip buildingAttacked;
+    public AudioClip buildingLost;
+
     private void Awake()
     {
         Instance = this;
@@ -45,6 +57,25 @@ public class UIManager : MonoBehaviour
         public UnityEvent callback;
     }
 
+    public void DisableStructures(Button button)
+    {
+        foreach (Transform child in structureParent)
+        {
+            if (child.GetComponent<Button>() != button)
+            {
+                child.GetComponent<Button>().interactable = false;
+            }
+        }
+    }
+
+    public void EnableStructures()
+    {
+        foreach (Transform child in structureParent)
+        {
+            child.GetComponent<Button>().interactable = true;
+        }
+    }
+
     public void PopulateStructures(List<StructureItem> structures)
     {
         ClearStructures();
@@ -53,6 +84,9 @@ public class UIManager : MonoBehaviour
             GameObject button = Instantiate(buttonPrefab, structureParent);
             button.GetComponent<UIConstructItem>().image.sprite = item.icon;
             button.GetComponent<UIConstructItem>().callback = item.callback;
+            button.GetComponent<UIConstructItem>().buildTime = item.structure.cost/20;
+            button.GetComponent<UIConstructItem>().isStructure = true;
+            button.GetComponent<UIConstructItem>().cost = item.structure.cost;
         }
     }
 
@@ -72,6 +106,9 @@ public class UIManager : MonoBehaviour
             GameObject button = Instantiate(buttonPrefab, unitParent);
             button.GetComponent<UIConstructItem>().image.sprite = item.icon;
             button.GetComponent<UIConstructItem>().callback = item.callback;
+            button.GetComponent<UIConstructItem>().isStructure = false;
+            button.GetComponent<UIConstructItem>().buildTime = item.unit.cost/20;
+            button.GetComponent<UIConstructItem>().cost = item.unit.cost;
         }
     }
 
@@ -79,7 +116,10 @@ public class UIManager : MonoBehaviour
     {
         foreach (Transform child in unitParent)
         {
-            Destroy(child.gameObject);
+            if (child.gameObject)
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 }
