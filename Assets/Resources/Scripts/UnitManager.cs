@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,7 +71,10 @@ public class UnitManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Floor")))
             {
-                Vector3[] positions = GetPositionsArray(hit.point, new int[]{5, 10, 15, 20}, new float[] { unitRadius, unitRadius * 2, unitRadius * 3, unitRadius * 4 });
+                int factor = (int)Math.Round(selectedUnits.Count / 5.0f, MidpointRounding.AwayFromZero);
+                if (factor == 0) factor = 1;
+
+                Vector3[] positions = GetPositionsArray(hit.point, Enumerable.Range(1, factor).Select(x => x * 5).ToArray(), Enumerable.Range(1, factor).Select(x => unitRadius * x).ToArray());
                 for (int i = 0; i < selectedUnits.Count; i++)
                 {
                         selectedUnits[i].SetTarget(positions[i]);
