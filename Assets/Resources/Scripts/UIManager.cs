@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     public AudioClip trainingStart;
     public AudioClip trainingEnd;
     public AudioClip lowMoney;
+    public AudioClip lowPower;
     public AudioClip canceled;
     public AudioClip unitAttacked;
     public AudioClip unitLost;

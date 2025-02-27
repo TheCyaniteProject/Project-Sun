@@ -164,8 +164,11 @@ public class Unit : MonoBehaviour
     {
         if (health == maxHealth)
         {
-            UIManager.Instance.voice.clip = UIManager.Instance.unitAttacked;
-            UIManager.Instance.voice.Play();
+            if (teamID == PlayerData.Instance.teamID)
+            {
+                UIManager.Instance.voice.clip = UIManager.Instance.unitAttacked;
+                UIManager.Instance.voice.Play();
+            }
         }
         health -= amount;
         if (health <= 0f)
@@ -178,8 +181,11 @@ public class Unit : MonoBehaviour
             {
                 UnitManager.Instance.unitList.Remove(this);
             }
-            UIManager.Instance.voice.clip = UIManager.Instance.unitLost;
-            UIManager.Instance.voice.Play();
+            if (teamID == PlayerData.Instance.teamID)
+            {
+                UIManager.Instance.voice.clip = UIManager.Instance.unitLost;
+                UIManager.Instance.voice.Play();
+            }
         }
     }
 

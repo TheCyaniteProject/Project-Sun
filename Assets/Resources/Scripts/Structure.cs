@@ -113,9 +113,10 @@ public class Structure : MonoBehaviour
     private void OnDestroy()
     {
         DeSelect();
-        UIManager.Instance.voice.clip = UIManager.Instance.buildingLost;
-        UIManager.Instance.voice.Play();
         StructureManager.Instance.structureList.Remove(this);
+
+        //UIManager.Instance.voice.clip = UIManager.Instance.buildingLost;
+        //UIManager.Instance.voice.Play();
     }
 
 }

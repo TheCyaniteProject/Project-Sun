@@ -42,6 +42,7 @@ public class PlayerData : MonoBehaviour
         Instance = this;
     }
 
+    bool lowPowerMsg = false;
     private void Update()
     {
         if (powerSlider)
@@ -51,14 +52,23 @@ public class PlayerData : MonoBehaviour
             if (availablePower >= maxPower * 0.5f)
             {
                 powerBar.color = fullPower;
+                lowPowerMsg = false;
             }
             else if (availablePower < maxPower * 0.5f && availablePower >= maxPower * 0.1f)
             {
                 powerBar.color = lowPower;
+                lowPowerMsg = false;
             }
             else if (availablePower < maxPower * 0.1f)
             {
                 powerBar.color = noPower;
+                if (!lowPowerMsg)
+                {
+                    lowPowerMsg = true;
+
+                    UIManager.Instance.voice.clip = UIManager.Instance.lowPower;
+                    UIManager.Instance.voice.Play();
+                }
             }
         }
         if (moneyLabel)
