@@ -7,7 +7,7 @@ using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
 // This is the base class. It's intended to be inhereted, but for now is used for all units
-[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(NavMeshAgent)), RequireComponent(typeof(LineRenderer))]
 public class Unit : MonoBehaviour
 {
     public NavMeshAgent agent;
@@ -26,11 +26,13 @@ public class Unit : MonoBehaviour
     private bool mouseOver = false;
     [Space]
     public Animator animator;
+    public LineRenderer lineRenderer;
 
     private void Awake()
     {
         targetPos = transform.position;
         agent = GetComponent<NavMeshAgent>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
 
     bool selecting = false;
@@ -49,18 +51,6 @@ public class Unit : MonoBehaviour
                 Select();
             }
         }
-        else if (Input.GetMouseButtonUp(1) && !UIManager.Instance.mouseOverUI)
-        {
-            if (isSelected)
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Floor")))
-                {
-                    SetTarget(hit.point);
-                }
-            }
-        }
         if (UnitManager.Instance._isDragging && !UnitManager.Instance.selectedUnits.Contains(this))
         {
             if (isSelected)
@@ -69,10 +59,6 @@ public class Unit : MonoBehaviour
             }
         }
 
-        if (Vector3.Distance(transform.position, targetPos) < 1.5f)
-        {
-            agent.isStopped = true;
-        }
         if (isStopped)
         {
             if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -104,6 +90,17 @@ public class Unit : MonoBehaviour
         //    transform.position = position;
         //}
 
+        lineRenderer.SetPosition(0, new Vector3(transform.position.x, 0, transform.position.z));
+        lineRenderer.SetPosition(1, targetPos);
+        if (isSelected)
+        {
+            lineRenderer.enabled = true;
+        }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
+
         lastPosition = transform.position;
     }
 
@@ -113,9 +110,7 @@ public class Unit : MonoBehaviour
         if (NavMesh.SamplePosition(position, out hit, 100f, NavMesh.AllAreas))
         {
             agent.isStopped = false;
-            agent.destination = new Vector3(Mathf.Round(hit.position.x / 3) * 3,
-                                 hit.position.y,
-                                 Mathf.Round(hit.position.z / 3) * 3);
+            agent.destination = position;
             targetPos = agent.destination;
             agent.avoidancePriority = Random.Range(1, 100);
         }

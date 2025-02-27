@@ -30,7 +30,7 @@ public class StructureManager : MonoBehaviour
     {
         if (selectedStructure)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
             {
                 selectedStructure.DeSelect();
             }
@@ -80,7 +80,7 @@ public class StructureManager : MonoBehaviour
                     newStructure.teamID = PlayerData.Instance.teamID;
                 }
             }
-            else if (Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1) && !UIManager.Instance.mouseOverUI)
             {
                 ClearBuildStructure();
             }

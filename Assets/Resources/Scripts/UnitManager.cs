@@ -8,6 +8,7 @@ public class UnitManager : MonoBehaviour
     public static UnitManager Instance;
 
     public RectTransform selectionBox;
+    public float unitRadius = 5f;
 
     public List<Unit> unitList;
     public List<Unit> selectedUnits;
@@ -61,6 +62,20 @@ public class UnitManager : MonoBehaviour
             isDragging = false;
             selectionBox.gameObject.SetActive(false);
         }
+        if (Input.GetMouseButtonUp(1) && !UIManager.Instance.mouseOverUI)
+        {
+            // get positions
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Floor")))
+            {
+                Vector3[] positions = GetPositionsArray(hit.point, new int[]{5, 10, 15, 20}, new float[] { unitRadius, unitRadius * 2, unitRadius * 3, unitRadius * 4 });
+                for (int i = 0; i < selectedUnits.Count; i++)
+                {
+                        selectedUnits[i].SetTarget(positions[i]);
+                }
+            }
+        }
     }
 
     void SelectUnits()
@@ -90,5 +105,35 @@ public class UnitManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public Vector3[] GetPositionsArray(Vector3 targetPosition, int[] counts, float[] radiuses)
+    {
+        List<Vector3> positions = new List<Vector3>();
+        for (int i = 0; i < radiuses.Length; i++)
+        {
+            positions.AddRange(GetPositionsArray(targetPosition, counts[i], radiuses[i]));
+        }
+
+        return positions.ToArray();
+    }
+
+    public Vector3[] GetPositionsArray(Vector3 targetPosition, int count, float radius)
+    {
+        List<Vector3> positions = new List<Vector3>();
+        for (int i = 0; i < count; i++)
+        {
+            float angle = i * (360f / count);
+            Vector3 dir = ApplyRotationToVector(new Vector3(1,0), angle);
+            Vector3 position = targetPosition + dir * radius;
+            positions.Add(position);
+        }
+
+        return positions.ToArray();
+    }
+
+    private Vector3 ApplyRotationToVector(Vector3 vector, float angle)
+    {
+        return Quaternion.Euler(0, angle, 0) * vector;
     }
 }
