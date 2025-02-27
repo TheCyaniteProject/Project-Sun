@@ -71,8 +71,7 @@ public class UnitManager : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 1000, LayerMask.GetMask("Floor")))
             {
-                int factor = (int)Math.Round(selectedUnits.Count / 5.0f, MidpointRounding.AwayFromZero);
-                if (factor == 0) factor = 1;
+                int factor = (int)Math.Ceiling(selectedUnits.Count / 5.0f);
 
                 Vector3[] positions = GetPositionsArray(hit.point, Enumerable.Range(1, factor).Select(x => x * 5).ToArray(), Enumerable.Range(1, factor).Select(x => unitRadius * x).ToArray());
                 for (int i = 0; i < selectedUnits.Count; i++)
