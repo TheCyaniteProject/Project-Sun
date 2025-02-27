@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour
 
     bool selecting = false;
     Vector3 lastPosition;
-    private void Update()
+    public virtual void Update()
     {
         if (Input.GetMouseButtonDown(0) && !UIManager.Instance.mouseOverUI)
         {
@@ -81,14 +81,6 @@ public class Unit : MonoBehaviour
         {
             isStopped = false;
         }
-        //if (isStopped)
-        //{
-        //    Vector3 position = new Vector3(Mathf.Round(transform.position.x / 3) * 3,
-        //                         transform.position.y,
-        //                         Mathf.Round(transform.position.z / 3) * 3);
-
-        //    transform.position = position;
-        //}
 
         lineRenderer.SetPosition(0, new Vector3(transform.position.x, 0, transform.position.z));
         lineRenderer.SetPosition(1, targetPos);

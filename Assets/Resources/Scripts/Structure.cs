@@ -20,8 +20,8 @@ public class Structure : MonoBehaviour
     public UnityEvent onSelect;
     public UnityEvent onDeselect;
 
-    private bool mouseOver = false;
-    private bool isSelected = false;
+    public bool mouseOver = false;
+    public bool isSelected = false;
 
     private void Start()
     {
